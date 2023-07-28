@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "odk",
+  "version": "1.2",
+  "name": "OKare Development Kit",
+  "description": "A great tool for redstonic CPU development!",
+  "authors": ["Dylan"],
+  "contact": {
+    "repo": "https://github.com/Dylan-wg"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/odk/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.okc.odk.OdkMain"
+    ]
+  },
+  "mixins": [
+    "odk.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "1.19"}
+}

@@ -1,0 +1,166 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 2023/7/24 下午1:16
+Description: Unexpected error
+
+org.spongepowered.asm.mixin.injection.callback.CancellationException: The call useOnBlock is not cancellable.
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInfo.cancel(CallbackInfo.java:101)
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable.setReturnValue(CallbackInfoReturnable.java:106)
+	at net.minecraft.item.ShovelItem.handler$zie000$useOnBlock(ShovelItem.java:1033)
+	at net.minecraft.item.ShovelItem.useOnBlock(ShovelItem.java)
+	at net.minecraft.item.ItemStack.useOnBlock(ItemStack.java:337)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.interactBlockInternal(ClientPlayerInteractionManager.java:308)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.method_41933(ClientPlayerInteractionManager.java:283)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.sendSequencedPacket(ClientPlayerInteractionManager.java:237)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.interactBlock(ClientPlayerInteractionManager.java:282)
+	at net.minecraft.client.MinecraftClient.doItemUse(MinecraftClient.java:1519)
+	at net.minecraft.client.MinecraftClient.handleInputEvents(MinecraftClient.java:1742)
+	at net.minecraft.client.MinecraftClient.tick(MinecraftClient.java:1590)
+	at net.minecraft.client.MinecraftClient.render(MinecraftClient.java:1032)
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:721)
+	at net.minecraft.client.main.Main.main(Main.java:210)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:461)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInfo.cancel(CallbackInfo.java:101)
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable.setReturnValue(CallbackInfoReturnable.java:106)
+	at net.minecraft.item.ShovelItem.handler$zie000$useOnBlock(ShovelItem.java:1033)
+	at net.minecraft.item.ShovelItem.useOnBlock(ShovelItem.java)
+	at net.minecraft.item.ItemStack.useOnBlock(ItemStack.java:337)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.interactBlockInternal(ClientPlayerInteractionManager.java:308)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.method_41933(ClientPlayerInteractionManager.java:283)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.sendSequencedPacket(ClientPlayerInteractionManager.java:237)
+	at net.minecraft.client.network.ClientPlayerInteractionManager.interactBlock(ClientPlayerInteractionManager.java:282)
+	at net.minecraft.client.MinecraftClient.doItemUse(MinecraftClient.java:1519)
+	at net.minecraft.client.MinecraftClient.handleInputEvents(MinecraftClient.java:1742)
+
+-- Affected level --
+Details:
+	All players: 1 total; [ClientPlayerEntity['Player837'/1, l='ClientLevel', x=9.50, y=-60.00, z=7.50]]
+	Chunk stats: 961, 609
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (0,-60,0), Section: (at 0,4,0 in 0,-4,0; chunk contains blocks 0,-64,0 to 15,319,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 560 game time, 560 day time
+	Server brand: fabric
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.addDetailsToCrashReport(ClientWorld.java:424)
+	at net.minecraft.client.MinecraftClient.addDetailsToCrashReport(MinecraftClient.java:2034)
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:742)
+	at net.minecraft.client.main.Main.main(Main.java:210)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:461)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: Default, Fabric Mods
+
+-- System Details --
+Details:
+	Minecraft Version: 1.19
+	Minecraft Version ID: 1.19
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 17.0.7, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 948465888 bytes (904 MiB) / 1971322880 bytes (1880 MiB) up to 8510242816 bytes (8116 MiB)
+	CPUs: 32
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 9 7945HX with Radeon Graphics        
+	Identifier: AuthenticAMD Family 25 Model 97 Stepping 2
+	Microarchitecture: unknown
+	Frequency (GHz): 2.50
+	Number of physical packages: 1
+	Number of physical CPUs: 16
+	Number of logical CPUs: 32
+	Graphics card #0 name: NVIDIA GeForce RTX 4060 Laptop GPU
+	Graphics card #0 vendor: NVIDIA (0x10de)
+	Graphics card #0 VRAM (MB): 4095.00
+	Graphics card #0 deviceId: 0x28e0
+	Graphics card #0 versionInfo: DriverVersion=31.0.15.3152
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 5.60
+	Memory slot #0 type: Unknown
+	Memory slot #1 capacity (MB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 5.60
+	Memory slot #1 type: Unknown
+	Virtual memory max (MB): 65216.53
+	Virtual memory used (MB): 29347.97
+	Swap memory total (MB): 32768.00
+	Swap memory used (MB): 139.91
+	JVM Flags: 0 total; 
+	Fabric Mods: 
+		fabric: Fabric API 0.58.0+1.19
+		fabric-api-base: Fabric API Base 0.4.9+e62f51a3a9
+		fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.6.7+9ff28f40a9
+		fabric-biome-api-v1: Fabric Biome API (v1) 9.0.14+b2a4a624a9
+		fabric-blockrenderlayer-v1: Fabric BlockRenderLayer Registration (v1) 1.1.18+9ff28f40a9
+		fabric-command-api-v2: Fabric Command API (v2) 2.1.2+0d55f585a9
+		fabric-content-registries-v0: Fabric Content Registries (v0) 3.2.1+07df213ea9
+		fabric-convention-tags-v1: Fabric Convention Tags 1.0.8+37622d24a9
+		fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.2.3+bd0a0d4aa9
+		fabric-data-generation-api-v1: Fabric Data Generation API (v1) 5.1.2+a680b9b4a9
+		fabric-dimensions-v1: Fabric Dimensions API (v1) 2.1.28+a6d2f785a9
+		fabric-entity-events-v1: Fabric Entity Events (v1) 1.4.16+9ff28f40a9
+		fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.4.26+9ff28f40a9
+		fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.19+18990361a9
+		fabric-gametest-api-v1: Fabric Game Test API (v1) 1.0.33+e62f51a3a9
+		fabric-item-api-v1: Fabric Item API (v1) 1.5.5+35a03c43a9
+		fabric-item-groups-v0: Fabric Item Groups (v0) 0.3.26+9ff28f40a9
+		fabric-key-binding-api-v1: Fabric Key Binding API (v1) 1.0.18+9ff28f40a9
+		fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 2.1.0+33fbc738a9
+		fabric-loot-api-v2: Fabric Loot API (v2) 1.1.1+03a4e568a9
+		fabric-message-api-v1: Fabric Message API (v1) 1.0.1+513f4a59a9
+		fabric-mining-level-api-v1: Fabric Mining Level API (v1) 2.1.11+33fbc738a9
+		fabric-models-v0: Fabric Models (v0) 0.3.15+9ff28f40a9
+		fabric-networking-api-v1: Fabric Networking API (v1) 1.1.0+442de8b8a9
+		fabric-object-builder-api-v1: Fabric Object Builder API (v1) 4.0.8+9ff28f40a9
+		fabric-particles-v1: Fabric Particles (v1) 1.0.8+dc39553aa9
+		fabric-registry-sync-v0: Fabric Registry Sync (v0) 0.9.18+23c4cfefa9
+		fabric-renderer-api-v1: Fabric Renderer API (v1) 1.0.8+9ff28f40a9
+		fabric-renderer-indigo: Fabric Renderer - Indigo 0.6.10+5187d39fa9
+		fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.3.12+9ff28f40a9
+		fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 3.0.5+9ff28f40a9
+		fabric-rendering-v1: Fabric Rendering (v1) 1.10.14+9ff28f40a9
+		fabric-resource-conditions-api-v1: Fabric Resource Conditions API (v1) 2.0.9+e62f51a3a9
+		fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.5.6+5f1a85e0a9
+		fabric-screen-api-v1: Fabric Screen API (v1) 1.0.24+f05effafa9
+		fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.2.7+9ff28f40a9
+		fabric-textures-v0: Fabric Textures (v0) 1.0.18+9ff28f40a9
+		fabric-transfer-api-v1: Fabric Transfer API (v1) 2.0.9+e62f51a3a9
+		fabric-transitive-access-wideners-v1: Fabric Transitive Access Wideners (v1) 1.1.1+9e7660c6a9
+		fabricloader: Fabric Loader 0.14.9
+		java: Java HotSpot(TM) 64-Bit Server VM 17
+		minecraft: Minecraft 1.19
+		odk: OKare Development Kit 1.0
+	Launched Version: Fabric
+	Backend library: LWJGL version 3.3.1 SNAPSHOT
+	Backend API: NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2 GL version 3.2.0 NVIDIA 531.52, NVIDIA Corporation
+	Window size: 2560x1494
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fabric'; Server brand changed to 'fabric'
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: Fabric Mods
+	Current Language: 简体中文 (中国大陆)
+	CPU: 32x AMD Ryzen 9 7945HX with Radeon Graphics 
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayerEntity['Player837'/1, l='ServerLevel[test]', x=9.50, y=-60.00, z=7.50]]
+	Data Packs: vanilla, Fabric Mods
+	World Generation: Stable

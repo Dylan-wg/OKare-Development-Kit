@@ -1,0 +1,20 @@
+{
+  "mappings": {
+    "com/okc/odk/Mixin/ToolMixin": {
+      "useOnBlock": "Lnet/minecraft/class_1821;method_7884(Lnet/minecraft/class_1838;)Lnet/minecraft/class_1269;"
+    },
+    "com/okc/odk/Mixin/RepeaterMixin": {
+      "onUse": "Lnet/minecraft/class_2462;method_9534(Lnet/minecraft/class_2680;Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;Lnet/minecraft/class_3965;)Lnet/minecraft/class_1269;"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/okc/odk/Mixin/ToolMixin": {
+        "useOnBlock": "Lnet/minecraft/class_1821;method_7884(Lnet/minecraft/class_1838;)Lnet/minecraft/class_1269;"
+      },
+      "com/okc/odk/Mixin/RepeaterMixin": {
+        "onUse": "Lnet/minecraft/class_2462;method_9534(Lnet/minecraft/class_2680;Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;Lnet/minecraft/class_3965;)Lnet/minecraft/class_1269;"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.okc.odk.Mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ToolMixin",
+    "RepeaterMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

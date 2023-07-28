@@ -1,0 +1,4 @@
+path/to/large_file.ext filter=lfs diff=lfs merge=lfs -text
+OKare-Development-Kit filter=lfs diff=lfs merge=lfs -text
+C:/Users/19426/Desktop/OKare-Development-Kit/OKare-Development-Kit filter=lfs diff=lfs merge=lfs -text
+C:/Users/19426/Desktop/OKare-Development-Kit/OKare-Development-Kit filter=lfs diff=lfs merge=lfs -text
