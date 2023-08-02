@@ -13,7 +13,7 @@
 4.将玩家坐标设定为ODKPOS：```/odk pos```    
 5.从ODKPOS开始向下给ROM写入大小为8bits的bits：```/odk writeROM <bits> ```   
 6.从ODKPOS开始向下给RAM写入大小为8bits的bits：```/odk writeRAM <bits> ```   
-7.从ODKPOS开始向下清楚8bits数据：```/odk clear```  
+7.从ODKPOS开始向下清除8bits数据：```/odk clear```  
 ### 三 odk工具
 1.odk工具是铁锹，可以用指令获得  
 2.当玩家主手持工具时
