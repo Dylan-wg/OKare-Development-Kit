@@ -6,13 +6,13 @@
 ### 一 使用环境
 目前仅支持Minecraft1.19，需要fabric 0.14.9，fabric api 0.58.0
 ### 二 模组指令
-1.显示模组信息：/odk  
-2.得到odk工具：/odk tool  
-3.显示ODKPOS：/odk showPos  
-4.将玩家坐标设定为ODKPOS：/odk pos  
-5.从ODKPOS开始向下给ROM写入大小为8bits的bits：/odk writeROM __*bits*__  
-6.从ODKPOS开始向下给RAM写入大小为8bits的bits：/odk writeRAM __*bits*__  
-7.从ODKPOS开始向下清楚8bits数据：/odk clear
+1.显示模组信息：```/odk ```  
+2.得到odk工具：```/odk tool ```   
+3.显示ODKPOS：```/odk showPos```    
+4.将玩家坐标设定为ODKPOS：```/odk pos```    
+5.从ODKPOS开始向下给ROM写入大小为8bits的bits：```/odk writeROM <bits> ```   
+6.从ODKPOS开始向下给RAM写入大小为8bits的bits：```/odk writeRAM <bits> ```   
+7.从ODKPOS开始向下清楚8bits数据：```/odk clear```  
 ### 三 odk工具
 1.odk工具是铁锹，可以用指令获得  
 2.当玩家主手持工具时
