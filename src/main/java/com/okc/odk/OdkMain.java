@@ -1,6 +1,6 @@
 package com.okc.odk;
 
-import Monitor.Monitor;
+import com.okc.odk.Monitor.Monitor;
 import com.okc.odk.Commands.MonitorCommands;
 import com.okc.odk.Commands.PortCommand;
 import com.okc.odk.Commands.SimpleCommands;
@@ -8,8 +8,6 @@ import com.okc.odk.Commands.WriteCommands;
 
 import com.okc.odk.Port.Port;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.MinecraftClient;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.item.Items;
