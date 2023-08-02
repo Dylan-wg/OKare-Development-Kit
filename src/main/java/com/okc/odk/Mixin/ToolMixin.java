@@ -28,10 +28,10 @@ public class ToolMixin {
             BlockPos pos = context.getBlockPos();
 
             //write ROM
-            if (world.getBlockState(pos).isOf(Blocks.OBSERVER.getDefaultState().getBlock())){
+            if (world.getBlockState(pos).isOf(Blocks.OBSERVER)){
                 world.setBlockState(pos,Blocks.WHITE_STAINED_GLASS.getDefaultState());
                 cir.setReturnValue(ActionResult.SUCCESS);
-            }else if (world.getBlockState(pos).isOf(Blocks.WHITE_STAINED_GLASS.getDefaultState().getBlock())){
+            }else if (world.getBlockState(pos).isOf(Blocks.WHITE_STAINED_GLASS)){
                 Direction direction = player.getHorizontalFacing();
                 world.setBlockState(pos,Blocks.OBSERVER.getDefaultState().with(ObserverBlock.FACING,direction));
                 cir.setReturnValue(ActionResult.SUCCESS);

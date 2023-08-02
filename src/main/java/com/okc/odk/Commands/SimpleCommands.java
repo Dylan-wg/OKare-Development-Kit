@@ -9,7 +9,6 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import static net.minecraft.server.command.CommandManager.*;
@@ -20,7 +19,7 @@ public class SimpleCommands {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess){
 
         dispatcher.register(literal("odk").executes(context -> {
-            context.getSource().getPlayer().sendMessage(Text.literal("OKare Development Kit 1.2 for Minecraft 1.19!").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+            context.getSource().getPlayer().sendMessage(Text.literal("OKare Development Kit 2.0 for Minecraft 1.19!").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             return 0;
         }).then(literal("tool").executes(context -> {
             context.getSource().getPlayer().giveItemStack(Items.IRON_SHOVEL.getDefaultStack());

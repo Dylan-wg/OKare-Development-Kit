@@ -1,7 +1,7 @@
 package com.okc.odk.Commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ObserverBlock;
@@ -23,14 +23,13 @@ public class WriteCommands {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess){
 
-        dispatcher.register(literal("odk").then(literal("writeROM").then(argument("bits", IntegerArgumentType.integer()).executes(context -> write(IntegerArgumentType.getInteger(context,"bits"),context.getSource().getPlayer(),context.getSource().getWorld(),"ROM")))));
-        dispatcher.register(literal("odk").then(literal("writeRAM").then(argument("bits", IntegerArgumentType.integer()).executes(context -> write(IntegerArgumentType.getInteger(context,"bits"),context.getSource().getPlayer(),context.getSource().getWorld(),"RAM")))));
+        dispatcher.register(literal("odk").then(literal("writeROM").then(argument("bits", StringArgumentType.string()).executes(context -> write(StringArgumentType.getString(context,"bits"),context.getSource().getPlayer(),context.getSource().getWorld(),"ROM")))));
+        dispatcher.register(literal("odk").then(literal("writeRAM").then(argument("bits", StringArgumentType.string()).executes(context -> write(StringArgumentType.getString(context,"bits"),context.getSource().getPlayer(),context.getSource().getWorld(),"RAM")))));
 
     }
 
-    private static int write(int bits, PlayerEntity player, World world, String type){
+    private static int write(String strBits, PlayerEntity player, World world, String type){
 
-        String strBits = String.valueOf(bits);
         BlockState[] state = new BlockState[2];
         Boolean flag = true;
         Direction facing = player.getHorizontalFacing();
@@ -57,8 +56,7 @@ public class WriteCommands {
                 if (ODKPOS != null){
                     for (int i = 0; i < 8; i++) {
                         world.setBlockState(writePos, state[Character.getNumericValue(strBits.charAt(i))]);
-                        int y = writePos.getY() - 2;
-                        writePos = new BlockPos(writePos.getX(), y, writePos.getZ());
+                        writePos = writePos.down(2);
                     }
 
                     player.sendMessage(Text.literal("You successfully wrote the data!").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
@@ -69,7 +67,7 @@ public class WriteCommands {
             }
 
 
-        }else player.sendMessage(Text.literal("Bits should be 8 bits!").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+        }else {player.sendMessage(Text.literal("Bits should be 8 bits!").setStyle(Style.EMPTY.withColor(Formatting.RED)));}
 
         return 0;
     }
