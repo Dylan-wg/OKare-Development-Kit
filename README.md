@@ -1,11 +1,13 @@
 # OKare-Development-Kit
 开发红石CPU的利器！  
 这里是1.2版本  
-2.0版本即将上线
+2.0版本即将上线  
+
+1.2版本下载：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
 
 ## 使用说明
 ### 一 使用环境
-目前仅支持Minecraft1.19，需要fabric 0.14.9，fabric api 0.58.0
+目前仅支持Minecraft 1.19，需要fabric 0.14.9，fabric api 0.58.0
 ### 二 模组指令
 1.显示模组信息：```/odk ```  
 2.得到odk工具：```/odk tool ```   
