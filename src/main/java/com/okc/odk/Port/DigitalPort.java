@@ -48,4 +48,23 @@ public class DigitalPort extends Port{
         return super.getDetails();
     }
 
+    @Override
+    public void update(World world){
+        this.value = this.getDigital(world);
+    }
+
+    @Override
+    public void valueInitialize(World world){
+        this.value = this.getDigital(world);
+    }
+
+    @Override
+    public Boolean detect(World world){
+        if (this.value != this.getDigital(world)){
+            this.update(world);
+            return true;
+        }
+        return false;
+    }
+
 }

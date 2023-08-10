@@ -1,6 +1,7 @@
 package com.okc.odk.Port;
 
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ComparatorBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,6 +45,9 @@ public class AnalogPort extends Port{
             return state.get(PistonBlock.EXTENDED) ? 15 : 0;
         } else if (state.getBlock() instanceof TrapdoorBlock) {
             return state.get(TrapdoorBlock.POWERED) ? 15 : 0;
+        } else if (state.getBlock() instanceof ShulkerBoxBlock || state.getBlock() instanceof JukeboxBlock || state.getBlock() instanceof HopperBlock || state.getBlock() instanceof BarrelBlock || state.getBlock() instanceof ChestBlock || state.getBlock() instanceof DropperBlock || state.getBlock() instanceof DispenserBlock || state.getBlock() instanceof FurnaceBlock || state.getBlock() instanceof BlastFurnaceBlock) {
+            BlockEntity blockEntity = world.getBlockEntity(this.pos);
+            return blockEntity.getCachedState().getComparatorOutput(world,this.pos);
         }
         return 0;
     }
@@ -51,6 +55,25 @@ public class AnalogPort extends Port{
     @Override
     public String[] getDetails(){
         return super.getDetails();
+    }
+
+    @Override
+    public void update(World world){
+        this.value = this.getDigital(world);
+    }
+
+    @Override
+    public void valueInitialize(World world){
+        this.value = this.getAnalog(world);
+    }
+
+    @Override
+    public Boolean detect(World world){
+        if (this.value != this.getAnalog(world)){
+            this.update(world);
+            return true;
+        }
+        return false;
     }
 
 }

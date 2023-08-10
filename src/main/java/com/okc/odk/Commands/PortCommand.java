@@ -2,8 +2,10 @@ package com.okc.odk.Commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.okc.odk.Monitor.Monitor;
 import com.okc.odk.Port.AnalogPort;
 import com.okc.odk.Port.DigitalPort;
+import com.okc.odk.Port.FlagPort;
 import com.okc.odk.Port.Port;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.ServerCommandSource;
@@ -16,9 +18,8 @@ import net.minecraft.world.World;
 import java.util.Objects;
 import java.util.Set;
 
+import static com.okc.odk.OdkMain.*;
 import static net.minecraft.server.command.CommandManager.*;
-import static com.okc.odk.OdkMain.ODKPOS;
-import static com.okc.odk.OdkMain.PORTS;
 
 public class PortCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess){
@@ -27,18 +28,27 @@ public class PortCommand {
         dispatcher.register(literal("odk").then(literal("port").then(literal("set").then(argument("name",StringArgumentType.string()).then(argument("type",StringArgumentType.string()).suggests((context, builder) -> {
             builder.suggest("digital");
             builder.suggest("analog");
+            builder.suggest("flag");
             return builder.buildFuture();
         }).executes(context -> {
             if (Objects.equals(StringArgumentType.getString(context, "type"), "digital") && ODKPOS != null && !PORTS.containsKey(StringArgumentType.getString(context,"name"))){
                 PORTS.put(StringArgumentType.getString(context,"name"),new DigitalPort(StringArgumentType.getString(context,"name"),ODKPOS));
+                PORTS.get(StringArgumentType.getString(context,"name")).valueInitialize(context.getSource().getWorld());
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+StringArgumentType.getString(context,"name")+" was created.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             } else if (Objects.equals(StringArgumentType.getString(context, "type"), "analog") && ODKPOS != null && !PORTS.containsKey(StringArgumentType.getString(context,"name"))) {
                 PORTS.put(StringArgumentType.getString(context,"name"),new AnalogPort(StringArgumentType.getString(context,"name"),ODKPOS));
+                PORTS.get(StringArgumentType.getString(context,"name")).valueInitialize(context.getSource().getWorld());
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+StringArgumentType.getString(context,"name")+" was created.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             } else if (ODKPOS == null) {
                 context.getSource().getPlayer().sendMessage(Text.literal("ODKPOS is NULL now!").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             } else if (PORTS.containsKey(StringArgumentType.getString(context,"name"))) {
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+StringArgumentType.getString(context,"name")+" is already exists!").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+            } else if (Objects.equals(StringArgumentType.getString(context, "type"), "flag") && ODKPOS != null && !PORTS.containsKey(StringArgumentType.getString(context,"name"))) {
+                PORTS.put(StringArgumentType.getString(context, "name"),new FlagPort(StringArgumentType.getString(context, "name"),ODKPOS));
+                PORTS.get(StringArgumentType.getString(context,"name")).stateInitialize(context.getSource().getWorld());
+                context.getSource().getPlayer().sendMessage(Text.literal("Port "+StringArgumentType.getString(context,"name")+" was created.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+            } else if (!Objects.equals(StringArgumentType.getString(context, "type"), "digital") && !Objects.equals(StringArgumentType.getString(context,"type"),"analog") && !Objects.equals(StringArgumentType.getString(context,"type"),"flag")){
+                context.getSource().getPlayer().sendMessage(Text.literal("Type error.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
             return 0;
         }))))));
@@ -48,6 +58,12 @@ public class PortCommand {
             if (PORTS.containsKey(StringArgumentType.getString(context,"name"))){
                 PORTS.remove(StringArgumentType.getString(context, "name"));
                 context.getSource().getPlayer().sendMessage(Text.literal("Port " + StringArgumentType.getString(context, "name") + " was removed.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                for (Monitor m : MONITORS.values()){
+                    if (m.Ports.containsKey(StringArgumentType.getString(context,"name"))){
+                        m.Ports.remove(StringArgumentType.getString(context, "name"));
+                    }
+                }
+                context.getSource().getPlayer().sendMessage(Text.literal("The port associated with monitor has been removed.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             } else if (!PORTS.containsKey(StringArgumentType.getString(context,"name"))) {
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+StringArgumentType.getString(context,"name")+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
@@ -56,8 +72,15 @@ public class PortCommand {
 
         //odk port remove all
         dispatcher.register(literal("odk").then(literal("port").then(literal("remove").then(literal("all").executes(context -> {
-            PORTS.clear();
-            context.getSource().getPlayer().sendMessage(Text.literal("All the ports were removed.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+            if (!PORTS.isEmpty()){
+                PORTS.clear();
+                for (Monitor m : MONITORS.values()){
+                    m.Ports.clear();
+                }
+                context.getSource().getPlayer().sendMessage(Text.literal("All the ports were removed.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+            } else if (PORTS.isEmpty()) {
+                context.getSource().getPlayer().sendMessage(Text.literal("No port exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+            }
             return 0;
         })))));
 
@@ -95,6 +118,7 @@ public class PortCommand {
         dispatcher.register(literal("odk").then(literal("port").then(literal("reset").then(argument("name",StringArgumentType.string()).then(argument("type",StringArgumentType.string()).suggests(((context, builder) -> {
             builder.suggest("digital");
             builder.suggest("analog");
+            builder.suggest("flag");
             return builder.buildFuture();
         })).executes(context -> {
             String name = StringArgumentType.getString(context,"name");
@@ -103,11 +127,30 @@ public class PortCommand {
                 if (Objects.equals(type, "digital")){
                     PORTS.remove(name);
                     PORTS.put(name,new DigitalPort(name,ODKPOS));
+                    PORTS.get(name).valueInitialize(context.getSource().getWorld());
                     context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
                 } else if (Objects.equals(type, "analog")) {
+                    Boolean flag = true;
+                    for (Monitor m : MONITORS.values()){
+                        if (m.startPort == PORTS.get(name) || m.stopPort == PORTS.get(name)){
+                            flag = false;
+                        }
+                    }
+                    if (flag){
+                        PORTS.remove(name);
+                        PORTS.put(name, new AnalogPort(name, ODKPOS));
+                        PORTS.get(name).valueInitialize(context.getSource().getWorld());
+                        context.getSource().getPlayer().sendMessage(Text.literal("Port " + name + " was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                    } else {
+                        context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" is flag.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+                    }
+                } else if (Objects.equals(type,"flag")) {
                     PORTS.remove(name);
-                    PORTS.put(name,new AnalogPort(name,ODKPOS));
+                    PORTS.put(name,new FlagPort(name,ODKPOS));
+                    PORTS.get(name).stateInitialize(context.getSource().getWorld());
                     context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                } else if (!Objects.equals(StringArgumentType.getString(context, "type"), "digital") && !Objects.equals(StringArgumentType.getString(context,"type"),"analog") && !Objects.equals(StringArgumentType.getString(context,"type"),"flag")) {
+                    context.getSource().getPlayer().sendMessage(Text.literal("Type error.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
                 }
             } else if (!PORTS.containsKey(name)) {
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
@@ -119,14 +162,20 @@ public class PortCommand {
         dispatcher.register(literal("odk").then(literal("port").then(literal("rename").then(argument("old name",StringArgumentType.string()).then(argument("new name",StringArgumentType.string()).executes(context -> {
             String oldName = StringArgumentType.getString(context,"old name");
             String newName = StringArgumentType.getString(context,"new name");
-            if (PORTS.containsKey(oldName)){
+            if (PORTS.containsKey(oldName) && !PORTS.containsKey(newName)) {
                 Port p = PORTS.get(oldName);
                 PORTS.remove(oldName);
                 p.setName(newName);
                 PORTS.put(newName,p);
+                for (Monitor m : MONITORS.values()){
+                    if (m.Ports.containsKey(oldName)){
+                        m.Ports.remove(oldName);
+                        m.Ports.put(p.name,p);
+                    }
+                }
                 context.getSource().getPlayer().sendMessage(Text.literal("Port "+oldName+" was renamed.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
-            } else if (!PORTS.containsKey(oldName)) {
-                context.getSource().getPlayer().sendMessage(Text.literal("Port "+oldName+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+            } else if (!PORTS.containsKey(oldName) || PORTS.containsKey(newName)) {
+                context.getSource().getPlayer().sendMessage(Text.literal("Port rename failed.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
             return 0;
         }))))));

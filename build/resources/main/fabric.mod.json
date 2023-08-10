@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "odk",
-  "version": "1.2",
+  "version": "2.0",
   "name": "OKare Development Kit",
   "description": "A great tool for redstonic CPU development!",
   "authors": ["Dylan"],

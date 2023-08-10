@@ -8,6 +8,7 @@ public class Port {
     public String name;
     public BlockPos pos;
     public String type;
+    public int value;
 
     public Port(String name, BlockPos pos) {
         this.name = name;
@@ -32,5 +33,15 @@ public class Port {
         String[] details = {strName,strType,strPos};
         return details;
     }
+
+    public Boolean detect(World world){
+        return false;
+    }
+
+    public void update(World world){}
+
+    public void stateInitialize(World world){}
+
+    public void valueInitialize(World world){}
 
 }
