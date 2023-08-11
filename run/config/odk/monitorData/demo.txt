@@ -1,0 +1,26 @@
+Information:
+  [name] test 
+  [ports] { p1 f1 f2 }
+  [startFlag] f1
+  [stopFlag] f2
+
+<start>
+  7t. p1 -> 15
+  11t. p1 -> 14
+  15t. p1 -> 13
+  19t. p1 -> 12
+  23t. p1 -> 11
+  27t. p1 -> 10
+  31t. p1 -> 9
+  35t. p1 -> 8
+  39t. p1 -> 7
+  43t. p1 -> 6
+  47t. p1 -> 5
+  51t. p1 -> 4
+  55t. p1 -> 3
+  59t. p1 -> 2
+  63t. p1 -> 1
+  67t. p1 -> 0
+<stop>
+
+[total time] 212t

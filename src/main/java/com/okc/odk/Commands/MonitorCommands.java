@@ -123,6 +123,12 @@ public class MonitorCommands {
                 }
                 sp = sp + "}";
                 player.sendMessage(Text.literal(sp).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                if (MONITORS.get(name).startPort != null){
+                    player.sendMessage(Text.literal("  [start flag] " + MONITORS.get(name).startPort.name).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                }
+                if (MONITORS.get(name).stopPort != null){
+                    player.sendMessage(Text.literal("  [stop flag] " + MONITORS.get(name).stopPort.name).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
+                }
             } else if (!MONITORS.containsKey(name)) {
                 player.sendMessage(Text.literal("Monitor "+name+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
@@ -150,15 +156,11 @@ public class MonitorCommands {
             String name = StringArgumentType.getString(context,"name");
             String fName = StringArgumentType.getString(context,"flag name");
             if (MONITORS.containsKey(name) && PORTS.containsKey(fName)){
-                if (!(PORTS.get(fName) instanceof AnalogPort)){
-                    MONITORS.get(name).setStopFlag(PORTS.get(fName));
-                    if (!MONITORS.get(name).Ports.containsKey(fName)) {
-                        MONITORS.get(name).addPort(PORTS.get(fName));
-                    }
-                    context.getSource().getPlayer().sendMessage(Text.literal("Flag port was set.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
-                } else if (PORTS.get(fName) instanceof AnalogPort) {
-                    context.getSource().getPlayer().sendMessage(Text.literal("Flags should be digital or flag.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
+                MONITORS.get(name).setStopFlag(PORTS.get(fName));
+                if (!MONITORS.get(name).Ports.containsKey(fName)){
+                    MONITORS.get(name).addPort(PORTS.get(fName));
                 }
+                context.getSource().getPlayer().sendMessage(Text.literal("Flag port was set.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             } else if (!MONITORS.containsKey(name) || !PORTS.containsKey(fName)) {
                 context.getSource().getPlayer().sendMessage(Text.literal("Some of them may not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }

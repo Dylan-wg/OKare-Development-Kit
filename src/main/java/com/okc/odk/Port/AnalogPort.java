@@ -59,7 +59,7 @@ public class AnalogPort extends Port{
 
     @Override
     public void update(World world){
-        this.value = this.getDigital(world);
+        this.value = this.getAnalog(world);
     }
 
     @Override

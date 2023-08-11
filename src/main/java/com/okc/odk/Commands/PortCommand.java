@@ -130,20 +130,10 @@ public class PortCommand {
                     PORTS.get(name).valueInitialize(context.getSource().getWorld());
                     context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
                 } else if (Objects.equals(type, "analog")) {
-                    Boolean flag = true;
-                    for (Monitor m : MONITORS.values()){
-                        if (m.startPort == PORTS.get(name) || m.stopPort == PORTS.get(name)){
-                            flag = false;
-                        }
-                    }
-                    if (flag){
-                        PORTS.remove(name);
-                        PORTS.put(name, new AnalogPort(name, ODKPOS));
-                        PORTS.get(name).valueInitialize(context.getSource().getWorld());
-                        context.getSource().getPlayer().sendMessage(Text.literal("Port " + name + " was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
-                    } else {
-                        context.getSource().getPlayer().sendMessage(Text.literal("Port "+name+" is flag.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
-                    }
+                    PORTS.remove(name);
+                    PORTS.put(name, new AnalogPort(name, ODKPOS));
+                    PORTS.get(name).valueInitialize(context.getSource().getWorld());
+                    context.getSource().getPlayer().sendMessage(Text.literal("Port " + name + " was reset.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
                 } else if (Objects.equals(type,"flag")) {
                     PORTS.remove(name);
                     PORTS.put(name,new FlagPort(name,ODKPOS));
