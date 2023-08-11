@@ -20,16 +20,22 @@
 + 对着白色玻璃或观察者按右键，其将变为观察者或白色玻璃，即写入ROM
 + 对着方块按左键，该方块的坐标将被选为ODKPOS，而方块不会被破坏
 + 在潜行状态下使用会实现原版铁锹的某些功能
-### Monitor功能
+### Monitor（监视器）功能
 1.功能介绍  
-+ Monitor是一种基于游戏时刻进行的监视功能。玩家可以创建端口和监视器，然后把端口加入监视器。监视器开始工作后将记录各个端口的变化，并且输出到一个记事本里。  
++ Monitor功能是一种基于游戏时刻进行的监视功能。玩家可以创建端口和监视器，然后把端口加入监视器。监视器开始工作后将记录各个端口的变化，并且输出到一个记事本里。  
 
-2.Port指令
+2.Port（端口）指令
 + 创建位置在OKDPOS上，名字为name，类型为type的端口```/odk port set <name> [<type>]```  
-  其中端口类型有digital，analog，flag三类
+  其中端口类型有digital，analog，flag三类。digital端口只输出数字信号值，即0或1；analog端口只输出模拟信号值，即0-15；flag端口是监视器开始或结束的标志端口，该端口上的方块一旦变化就会输出true，否则为false。
 + 将名字为name的端口重置到ODKPOS上，并将类型重置为type```/odk port reset <name> [<type>]```  
   若不输入类型，则端口类型不变
 + 将名字为old name的端口重命名为new name```/odk port rename <old name> <new name>```
++ 移除名字为name的端口```/odk port remove <name>```  
+如果想移出所有端口那就在name处输入all即可
++ 显示名字为name的端口的详细信息```/odk port showDetails <name>```
++ 获取当前名字为name的端口的值```/odk port get <name>```
++ 查看目前所有的端口```/odk port list```
++ 将自己传送到名字为name的端口处```/odk port tp <name>```
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
 + 2.0版本：[百度网盘](https://pan.baidu.com/s/1-Xw53dvXZDwR0pzEPB8FvQ) 提取码：0862  
