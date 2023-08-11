@@ -7,10 +7,11 @@ import net.minecraft.world.World;
 public class FlagPort extends Port{
 
     private BlockState state;
-    public Boolean flagValue = false;
+    public Boolean flagValue;
     public FlagPort(String name, BlockPos pos) {
         super(name, pos);
         this.type = "flag";
+        this.flagValue = false;
     }
 
     @Override

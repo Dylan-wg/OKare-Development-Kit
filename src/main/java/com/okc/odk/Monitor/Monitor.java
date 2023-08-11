@@ -29,10 +29,14 @@ public class Monitor {
     public Port stopPort = null;
     public int tick = -1;
     public LinkedHashMap<String[],String> Data = new LinkedHashMap<String[],String>();
-    public boolean isEnabled = false;
+    public boolean isEnabled;
     public static boolean enableWrite = true;
     public boolean isRegistry = false;
+    public boolean startRegistry = false;
+    public boolean stopRegistry = false;
+    public boolean saveEnable = false;
     public Monitor(String name) {
+        this.isEnabled = false;
         this.name = name;
     }
 
@@ -52,6 +56,8 @@ public class Monitor {
         this.Data.clear();
         this.tick = -1;  //tick reset
         if (this.judgement){
+            this.saveEnable = this.isEnabled;
+            this.isEnabled = false;
             player.sendMessage(Text.literal("Monitor "+name+" started.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             if (!this.isRegistry){
                 ClientTickEvents.START_CLIENT_TICK.register(playerEntity -> {
@@ -83,6 +89,7 @@ public class Monitor {
         if (this.judgement){
             this.judgement = false;
             this.isRegistry = true;
+            this.isEnabled = true;
         }
         player.sendMessage(Text.literal("Monitor "+name+" stopped.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
     }
@@ -106,28 +113,32 @@ public class Monitor {
     public void flagProcess(PlayerEntity player,World world){
         if (this.isEnabled){
 
-            ClientTickEvents.END_CLIENT_TICK.register(playerEntity -> {
-                CompletableFuture.runAsync(() -> {
-                    if (this.isEnabled) {
-                        if (this.startPort.detect(world) && this.startPort != null && !this.judgement) {
-                            this.judgement = true;
-                            this.start(player,world);
-                            this.isEnabled = false;
+            if (!startRegistry){
+                ClientTickEvents.END_CLIENT_TICK.register(playerEntity -> {
+                    CompletableFuture.runAsync(() -> {
+                        if (this.isEnabled) {
+                            if (this.startPort.detect(world) && this.startPort != null && !this.judgement) {
+                                this.judgement = true;
+                                this.start(player, world);
+                                this.isEnabled = false;
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            }
 
-            ClientTickEvents.END_CLIENT_TICK.register(playerEntity -> {
-                CompletableFuture.runAsync(() -> {
-                    if (!this.isEnabled) {
-                        if (this.stopPort.detect(world) && this.stopPort != null && this.judgement) {
-                            this.stop(player,world);
-                            this.isEnabled = true;
+            if (!stopRegistry){
+                ClientTickEvents.END_CLIENT_TICK.register(playerEntity -> {
+                    CompletableFuture.runAsync(() -> {
+                        if (!this.isEnabled) {
+                            if (this.stopPort.detect(world) && this.stopPort != null && this.judgement) {
+                                this.stop(player, world);
+                                this.isEnabled = true;
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            }
 
         }else {
             player.sendMessage(Text.literal("Flags are disabled.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
@@ -167,6 +178,7 @@ public class Monitor {
                 if (this.stopPort != null) {
                     writer.write("  [stopFlag] " + this.stopPort.name + "\n");
                 }
+                writer.write("  [flagEnable] "+String.valueOf(this.saveEnable));
                 writer.write("\n<start>");
                 for (String[] s : this.Data.keySet()) {
                     if (preS == null || !Objects.equals(preS[0],s[0])){

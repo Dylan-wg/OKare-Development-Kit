@@ -3,7 +3,7 @@ package com.okc.odk.Commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.okc.odk.Monitor.Monitor;
-import com.okc.odk.Port.AnalogPort;
+import com.okc.odk.Port.FlagPort;
 import com.okc.odk.Port.Port;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.player.PlayerEntity;
@@ -129,6 +129,7 @@ public class MonitorCommands {
                 if (MONITORS.get(name).stopPort != null){
                     player.sendMessage(Text.literal("  [stop flag] " + MONITORS.get(name).stopPort.name).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
                 }
+                player.sendMessage(Text.literal("  [flagEnable] "+String.valueOf(MONITORS.get(name).isEnabled)).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
             } else if (!MONITORS.containsKey(name)) {
                 player.sendMessage(Text.literal("Monitor "+name+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
@@ -193,6 +194,23 @@ public class MonitorCommands {
         dispatcher.register(literal("odk").then(literal("monitor").then(literal("flagEnable").then(argument("name",StringArgumentType.string()).executes(context -> {
             String name = StringArgumentType.getString(context,"name");
             if (MONITORS.containsKey(name)){
+
+                if (MONITORS.get(name).startPort != null){
+                    if (MONITORS.get(name).startPort instanceof FlagPort) {
+                        MONITORS.get(name).startPort.stateInitialize(context.getSource().getWorld());
+                    } else {
+                        MONITORS.get(name).startPort.valueInitialize(context.getSource().getWorld());
+                    }
+                }
+
+                if (MONITORS.get(name).stopPort != null){
+                    if (MONITORS.get(name).stopPort instanceof FlagPort) {
+                        MONITORS.get(name).stopPort.stateInitialize(context.getSource().getWorld());
+                    } else {
+                        MONITORS.get(name).stopPort.valueInitialize(context.getSource().getWorld());
+                    }
+                }
+
                 MONITORS.get(name).enabled();
                 MONITORS.get(name).flagProcess(context.getSource().getPlayer(),context.getSource().getWorld());
                 context.getSource().getPlayer().sendMessage(Text.literal("Flags were enabled.").setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
