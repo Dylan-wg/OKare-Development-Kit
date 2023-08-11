@@ -38,10 +38,10 @@
 + 将自己传送到名字为name的端口处```/odk port tp <name>```
 
 3.Monitor指令
-+ 创建一个名字为name的监视器``/odk monitor create <name>```
++ 创建一个名字为name的监视器```/odk monitor create <name>```
 + 将名字为port name的端口加入名字为name的监视器中```/odk monitor add <name> <port name>```
 + 将名字为port name的端口从名字为name的监视器中移除```/odk monitor remove <name> <port name>```
-+ 将名字为name的监视器删除```/odk monitor delete <name>
++ 将名字为name的监视器删除```/odk monitor delete <name>```  
 如果想删除所有监视器那就在name处输入all即可
 + 重置名字为name的监视器```/odk monitor reset <name>```
 重置后该监视器的端口将被全部移除
