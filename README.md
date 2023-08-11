@@ -31,11 +31,31 @@
   若不输入类型，则端口类型不变
 + 将名字为old name的端口重命名为new name```/odk port rename <old name> <new name>```
 + 移除名字为name的端口```/odk port remove <name>```  
-如果想移出所有端口那就在name处输入all即可
+如果想移出所有端口那就在name处输入all即可；与此同时，监视器中相应的端口也会被移除
 + 显示名字为name的端口的详细信息```/odk port showDetails <name>```
 + 获取当前名字为name的端口的值```/odk port get <name>```
 + 查看目前所有的端口```/odk port list```
 + 将自己传送到名字为name的端口处```/odk port tp <name>```
+
+3.Monitor指令
++ 创建一个名字为name的监视器``/odk monitor create <name>```
++ 将名字为port name的端口加入名字为name的监视器中```/odk monitor add <name> <port name>```
++ 将名字为port name的端口从名字为name的监视器中移除```/odk monitor remove <name> <port name>```
++ 将名字为name的监视器删除```/odk monitor delete <name>
+如果想删除所有监视器那就在name处输入all即可
++ 重置名字为name的监视器```/odk monitor reset <name>```
+重置后该监视器的端口将被全部移除
++ 将名字为old name的监视器重命名为new name```/odk monitor rename <old name> <new name>```
++ 将名字为flag name的端口设置为名字为name的监视器的启动标志```\odk monitor setStartFlag <name> <flag name>```
++ 将名字为flag name的端口设置为名字为name的监视器的停止标志```/odk monitor setStopFlag <name> <flag name>```
++ 激活名字为name的监视器的标志```/odk monitor flagEnable <name>```
++ 抑制名字为name的监视器的标志```/odk monitor flagDisable <name>```
++ 使名字为name的监视器开始监视```/odk monitor start <name>```
++ 使名字为name的监视器停止监视```/odk monitor stop <name>```
++ 显示名字为name的监视器的详细信息```/odk monitor showDetails <name>```
++ 查看所有的监视器```/odk monitor list```
++ 将名字为name的监视器的监视数据保存到游戏文件夹下的config\odk\monitorData\filename.txt中```/odk monitor saveData <name> <filename>```
+保存的默认文件名为name.txt
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
 + 2.0版本：[百度网盘](https://pan.baidu.com/s/1-Xw53dvXZDwR0pzEPB8FvQ) 提取码：0862  
