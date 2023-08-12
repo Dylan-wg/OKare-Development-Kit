@@ -46,7 +46,7 @@
 + 重置名字为name的监视器```/odk monitor reset <name>```
 重置后该监视器的端口将被全部移除
 + 将名字为old name的监视器重命名为new name```/odk monitor rename <old name> <new name>```
-+ 将名字为flag name的端口设置为名字为name的监视器的启动标志```\odk monitor setStartFlag <name> <flag name>```
++ 将名字为flag name的端口设置为名字为name的监视器的启动标志```/odk monitor setStartFlag <name> <flag name>```
 + 将名字为flag name的端口设置为名字为name的监视器的停止标志```/odk monitor setStopFlag <name> <flag name>```
 + 激活名字为name的监视器的标志```/odk monitor flagEnable <name>```
 + 抑制名字为name的监视器的标志```/odk monitor flagDisable <name>```
@@ -58,4 +58,4 @@
 保存的默认文件名为name.txt
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
-+ 2.0版本：[百度网盘](https://pan.baidu.com/s/1-Xw53dvXZDwR0pzEPB8FvQ) 提取码：0862  
++ 2.0版本：[百度网盘](https://pan.baidu.com/share/init?surl=S6hBLywoxwjJImW8sDlk-w) 提取码：xcf4  
