@@ -3,7 +3,7 @@
   "id": "odk",
   "version": "${version}",
   "name": "OKare Development Kit",
-  "description": "A great tool for redstonic CPU development!",
+  "description": "开发红石电路的利器!",
   "authors": ["Dylan"],
   "contact": {
     "repo": "https://github.com/Dylan-wg"
