@@ -23,4 +23,4 @@
 + 在潜行状态下使用会实现原版铁锹的某些功能
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
-+ 2.0版本：[百度网盘](https://pan.baidu.com/s/1-Xw53dvXZDwR0pzEPB8FvQ) 提取码：0862  
++ 2.0版本：[百度网盘](https://pan.baidu.com/s/1S6hBLywoxwjJImW8sDlk-w) 提取码：xcf4  
