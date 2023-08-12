@@ -1,5 +1,5 @@
 # OKare-Development-Kit
-开发红石CPU的利器！  
+开发红石电路的利器！  
 这里是1.2版本  
 最新版本是[2.0](https://github.com/Dylan-wg/OKare-Development-Kit/tree/2.0)
 
