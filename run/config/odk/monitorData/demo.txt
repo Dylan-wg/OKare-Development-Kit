@@ -3,6 +3,7 @@ Information:
   [ports] { p1 f1 f2 }
   [startFlag] f1
   [stopFlag] f2
+  [flagEnable] true
 
 <start>
   7t. p1 -> 15
