@@ -70,7 +70,7 @@
 + 标志可以是digital，analog或flag类型的端口。Digital类型的标志仅在数字信号值变化时触发；analog类型的标志仅在模拟信号值变化时触发；flag类型的标志仅在方块变化时触发
 + 从设置的端口中选择一个端口作为开始标志，用```/odk monitor setStartFlag <name> <flag name>```设置监视器的开始标志，若作为开始标志的端口原先不在监视器中，则它会被加入监视器中，成为监视对象
 + 从设置的端口中选择一个端口作为停止标志，用```/odk monitor setStopFlag <name> <flag name>```设置监视器的停止标志，若作为停止标志的端口原先不在监视器中，则它会被加入监视器中，成为监视对象
-+ 设置完成后，需要用```odk monitor flagEnable <name>```激活标志，此时标志可以被触发，一旦触发，监视器将开始或停止
++ 设置完成后，需要用```/odk monitor flagEnable <name>```激活标志，此时标志可以被触发，一旦触发，监视器将开始或停止
 + 如果不需要用标志了，可以用```/odk monitor flagDisable <name>```使监视器的标志被抑制，此时标志不会被触发
 
 7.监视器数据的保存
