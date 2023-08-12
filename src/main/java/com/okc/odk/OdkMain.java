@@ -8,6 +8,8 @@ import com.okc.odk.Commands.WriteCommands;
 
 import com.okc.odk.Port.Port;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.client.world.ClientWorld;
@@ -28,6 +30,7 @@ public class OdkMain implements ModInitializer {
     public static BlockPos ODKPOS = null;
     public static HashMap<String, Monitor> MONITORS = new HashMap<String,Monitor>();
     public static HashMap<String, Port> PORTS = new HashMap<String,Port>();
+    public int time = -1;
 
     @Override
     public void onInitialize() {
@@ -46,7 +49,11 @@ public class OdkMain implements ModInitializer {
             return true;
         });
 
-
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            ODKPOS = null;
+            MONITORS.clear();
+            PORTS.clear();
+        });
 
     }
 }

@@ -52,7 +52,7 @@ public class Monitor {
         this.Ports.remove(port.name);
     }
 
-    public void start(PlayerEntity player,World world){
+    public void monitorRegistry(PlayerEntity player,World world){
         this.Data.clear();
         this.tick = -1;  //tick reset
         if (this.judgement){
@@ -83,6 +83,10 @@ public class Monitor {
                 });
             }
         }
+    }
+
+    public void start(){
+        this.judgement = true;
     }
 
     public void stop(PlayerEntity player,World world){
@@ -118,8 +122,8 @@ public class Monitor {
                     CompletableFuture.runAsync(() -> {
                         if (this.isEnabled) {
                             if (this.startPort.detect(world) && this.startPort != null && !this.judgement) {
-                                this.judgement = true;
-                                this.start(player, world);
+                                this.start();
+                                this.monitorRegistry(player, world);
                                 this.isEnabled = false;
                             }
                         }

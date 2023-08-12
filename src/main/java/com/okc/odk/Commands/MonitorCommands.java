@@ -168,28 +168,6 @@ public class MonitorCommands {
             return 0;
         }))))));
 
-        //odk monitor start <name>
-        dispatcher.register(literal("odk").then(literal("monitor").then(literal("start").then(argument("name",StringArgumentType.string()).executes(context -> {
-            String name = StringArgumentType.getString(context,"name");
-            if (MONITORS.containsKey(name)){
-                MONITORS.get(name).start(context.getSource().getPlayer(),context.getSource().getWorld());
-            } else if (!MONITORS.containsKey(name)) {
-                context.getSource().getPlayer().sendMessage(Text.literal("Monitor "+name+" is not exist."));
-            }
-            return 0;
-        })))));
-
-        //odk monitor stop <name>
-        dispatcher.register(literal("odk").then(literal("monitor").then(literal("stop").then(argument("name",StringArgumentType.string()).executes(context -> {
-            String name = StringArgumentType.getString(context,"name");
-            if (MONITORS.containsKey(name)){
-                MONITORS.get(name).stop(context.getSource().getPlayer(),context.getSource().getWorld());
-            } else if (!MONITORS.containsKey(name)) {
-                context.getSource().getPlayer().sendMessage(Text.literal("Monitor "+name+" is not exist."));
-            }
-            return 0;
-        })))));
-
         //odk monitor flagEnable <name>
         dispatcher.register(literal("odk").then(literal("monitor").then(literal("flagEnable").then(argument("name",StringArgumentType.string()).executes(context -> {
             String name = StringArgumentType.getString(context,"name");
@@ -237,8 +215,8 @@ public class MonitorCommands {
         dispatcher.register(literal("odk").then(literal("monitor").then(literal("start").then(argument("name",StringArgumentType.string()).executes(context -> {
             String name = StringArgumentType.getString(context,"name");
             if (MONITORS.containsKey(name)){
-                MONITORS.get(name).judgement = true;
-                MONITORS.get(name).start(context.getSource().getPlayer(),context.getSource().getWorld());
+                MONITORS.get(name).start();
+                MONITORS.get(name).monitorRegistry(context.getSource().getPlayer(),context.getSource().getWorld());
             } else if (!MONITORS.containsKey(name)) {
                 context.getSource().getPlayer().sendMessage(Text.literal("Monitor "+name+" is not exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
@@ -295,8 +273,6 @@ public class MonitorCommands {
                 for (Monitor m : MONITORS.values()) {
                     context.getSource().getPlayer().sendMessage(Text.literal("  " + m.name).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)));
                 }
-            } else if (MONITORS.isEmpty()) {
-                context.getSource().getPlayer().sendMessage(Text.literal("No monitor exist.").setStyle(Style.EMPTY.withColor(Formatting.RED)));
             }
             return 0;
         }))));
