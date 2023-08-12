@@ -1,5 +1,5 @@
 # OKare-Development-Kit
-开发红石CPU的利器！  
+开发红石电路的利器！  
 这里是最新的2.0版本  
 
 ## 使用说明
@@ -56,6 +56,30 @@
 + 查看所有的监视器```/odk monitor list```
 + 将名字为name的监视器的监视数据保存到游戏文件夹下的config\odk\monitorData\filename.txt中```/odk monitor saveData <name> <filename>```
 保存的默认文件名为name.txt
+
+4.Monitor配置方法
++ 先用odk工具或```/odk pos```选择ODKPOS作为所需端口坐标，然后通过```/odk port set <name> [<type>]```把它设置为端口，从而完成端口的选择
++ 用```/odk monitor create <name>```创建监视器
++ 用```/odk monitor add <name> <port name>```将所需端口加入监视器中
+
+5.Monitor启动基础方法
++ 配置完成后，用```/odk monitor start <name>```即可使监视器开始监视
++ 用```/odk monitor stop <name>```即可停止监视
+
+6.Monitor的标志启动方法
++ 标志可以是digital，analog或flag类型的端口。Digital类型的标志仅在数字信号值变化时触发；analog类型的标志仅在模拟信号值变化时触发；flag类型的标志仅在方块变化时触发
++ 从设置的端口中选择一个端口作为开始标志，用```/odk monitor setStartFlag <name> <flag name>```设置监视器的开始标志，若作为开始标志的端口原先不在监视器中，则它会被加入监视器中，成为监视对象
++ 从设置的端口中选择一个端口作为停止标志，用```/odk monitor setStopFlag <name> <flag name>```设置监视器的停止标志，若作为停止标志的端口原先不在监视器中，则它会被加入监视器中，成为监视对象
++ 设置完成后，需要用```odk monitor flagEnable <name>```激活标志，此时标志可以被触发，一旦触发，监视器将开始或停止
++ 如果不需要用标志了，可以用```/odk monitor flagDisable <name>```使监视器的标志被抑制，此时标志不会被触发
+
+7.监视器数据的保存
++ 完成监视后，数据可以导出并以记事本的形式保存到游戏文件夹下的config\odk\monitorData中
++ 用```/odk monitor saveData <name> <filename>```保存，默认的文件名是监视器的名字，相同的文件会直接替换
++ 导出的文件包含各种信息，[点击](https://github.com/Dylan-wg/OKare-Development-Kit/blob/2.0/run/config/odk/monitorData/demo.txt)查看示例文件
+
+8.更详细的使用教程
++ 日后会由[B站@Dylan-wg](https://space.bilibili.com/700277869)发布
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
 + 2.0版本：[百度网盘](https://pan.baidu.com/share/init?surl=S6hBLywoxwjJImW8sDlk-w) 提取码：xcf4  
