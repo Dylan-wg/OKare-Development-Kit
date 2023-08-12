@@ -82,4 +82,4 @@
 + 日后会由[B站@Dylan-wg](https://space.bilibili.com/700277869)发布
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
-+ 2.0版本：[百度网盘](https://pan.baidu.com/share/init?surl=S6hBLywoxwjJImW8sDlk-w) 提取码：xcf4  
++ 2.0版本：[百度网盘](https://pan.baidu.com/s/1SUAM4fnNlAaN9_gabvZ-fw) 提取码：cqke  
