@@ -82,7 +82,7 @@
 + 日后会由[B站@Dylan-wg](https://space.bilibili.com/700277869)发布
 
 9.潜在的问题
-+ 使用中继器或比较器作为停止标志时，可能不会被触发
++ 使用**中继器**或**比较器**作为停止标志时，可能**不会被触发**
 ### 下载地址
 + 1.2版本：[百度网盘](https://pan.baidu.com/s/1IgxeAI2ur6S4uMVsoWQX7g) 提取码：kkdb
 + 2.0版本：[百度网盘](https://pan.baidu.com/s/1SUAM4fnNlAaN9_gabvZ-fw) 提取码：cqke  
