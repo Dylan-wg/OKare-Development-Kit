@@ -1,4 +1,5 @@
 # OKare-Development-Kit
+![](https://github.com/Dylan-wg/OKare-Development-Kit/blob/2.0/src/main/resources/assets/odk/icon.png)
 开发红石电路的利器！  
 这里是最新的2.0版本  
 
